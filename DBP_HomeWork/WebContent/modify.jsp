@@ -1,7 +1,7 @@
 <%@page import="Homework2.MemberDto"%>
 <%@page import="Homework2.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+    pageEncoding="EUC-KR"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	String id = (String)session.getAttribute("id");
@@ -18,15 +18,16 @@
 </head>
 <body>
 	<form action="modifyOk.jsp" method="post" name="reg_frm">
-		ì•„ì´ë”” : <%= dto.getId() %><br />
-		ë¹„ë°€ë²ˆí˜¸ : <input type="password" name="pwd" size="20"><br />
-		ë¹„ë°€ë²ˆí˜¸ í™•ì¸ : <input type="password" name="pw_check" size="20"><br />
-		ì´ë¦„ : <%= dto.getName() %><br />
-		ë©”ì¼ : <input type="text" name="email" size="20" value="<%= dto.getEmail() %>"><br />
-		ì „í™”ë²ˆí˜¸ : <input type="text" name="tel" size="50" value="<%= dto.getTel() %>"><br />
-		ì„±ë³„ : <input type="text" name="sex" size="10" value="<%= dto.getSex() %>"><br />
-		ì†Œê°œ : <input type="text" name="introduction" size="100" value="<%= dto.getIntroduction() %>"><br />
-		<input type="button" value="ìˆ˜ì •" onclick="updateInfoConfirm()">&nbsp;&nbsp;&nbsp; <input type="reset" value="ì·¨ì†Œ" onclick="javascript:window.location='login.jsp'">
+		¾ÆÀÌµð : <%= dto.getId() %><br />
+		ºñ¹Ð¹øÈ£ : <input type="password" name="pwd" size="20"><br />
+		ºñ¹Ð¹øÈ£ È®ÀÎ : <input type="password" name="pw_check" size="20"><br />
+		ÀÌ¸§ : <%= dto.getName() %><br />
+		¸ÞÀÏ : <input type="text" name="email" size="20" value="<%= dto.getEmail() %>"><br />
+		Àü°ø : <input type="text" name="dept" size="20" value="<%= dto.getDept() %>"><br />
+		ÀüÈ­¹øÈ£ : <input type="text" name="tel" size="50" value="<%= dto.getTel() %>"><br />
+		¼ºº° : <input type="text" name="sex" size="10" value="<%= dto.getSex() %>"><br />
+		¼Ò°³ : <input type="text" name="introduction" size="100" value="<%= dto.getIntroduction() %>"><br />
+		<input type="button" value="¼öÁ¤" onclick="updateInfoConfirm()"> &nbsp;&nbsp;&nbsp; <input type="reset" value="Ãë¼Ò" onclick="javascript:window.location='login.jsp'">
 	</form>
 </body>
 </html>

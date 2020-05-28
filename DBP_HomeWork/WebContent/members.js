@@ -15,18 +15,18 @@ function infoConfirm() {
 		return;
 	}
 	
-	if(document.reg_frm.pw.value.length == 0) {
+	if(document.reg_frm.pwd.value.length == 0) {
 		alert("비밀번호는 필수사항입니다.");
-		reg_frm.pw.focus();
+		reg_frm.pwd.focus();
 		return;
 	}
-	
-	if(document.reg_frm.pw.value != document.reg_frm.pw_check.value) {
+	/*
+	if(document.reg_frm.pwd.value != document.reg_frm.pw_check.value) {
 		alert("비밀번호가 일치하지 않습니다.");
 		reg_frm.pw.focus();
 		return;
 	}
-	
+	*/
 	if(document.reg_frm.name.value.length == 0) {
 		alert("이름은 필수사항 입니다.");
 		reg_frm.name.focus();
@@ -39,9 +39,9 @@ function infoConfirm() {
 		return;
 	}
 	
-	if(document.reg_frm.eMail.value.length == 0) {
+	if(document.reg_frm.email.value.length == 0) {
 		alert("메일은 필수사항입니다..");
-		reg_frm.eMail.focus();
+		reg_frm.email.focus();
 		return;
 	}
 	
@@ -49,24 +49,26 @@ function infoConfirm() {
 }
 
 function updateInfoConfirm() {
-	if(document.reg_frm.pw.value == "") {
+	if(document.reg_frm.pwd.value == "") {
 		alert("비밀번호는 필수사항입니다.");
-		document.reg_frm.pw.focus();
+		document.reg_frm.pwd.focus();
 		return;
 	}
 	
-	if(document.reg_frm.pw.value != document.reg_frm.pw_check.value) {
+	if(document.reg_frm.pwd.value != document.reg_frm.pw_check.value) {
 		alert("비밀번호가 일치하지않습니다.");
-		reg_frm.pw.focus();
+		reg_frm.pwd.focus();
 		return;
 	}
 	
-	if(document.reg_frm.eMail.value.length == 0) {
+	if(document.reg_frm.email.value.length == 0) {
 		alert("메일은 필수사항입니다..");
-		reg_frm.eMail.focus();
+		reg_frm.email.focus();
 		return;
 	}
 	
 	document.reg_frm.submit();
 	
 }
+
+

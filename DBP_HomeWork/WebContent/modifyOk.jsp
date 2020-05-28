@@ -1,7 +1,7 @@
 <%@page import="Homework2.MemberDao"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <jsp:useBean id="dto" class="Homework2.MemberDto" scope="page" />
@@ -17,14 +17,14 @@
 	if(ri == 1) {
 %>
 	<script language="javascript">
-		alert("Á¤º¸¼öÁ¤ µÇ¾ú½À´Ï´Ù.");
+		alert("ì •ë³´ìˆ˜ì • ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		document.location.href="main.jsp";
 	</script>
 <%
 	} else {
 %>
 	<script language="javascript">
-		alert("Á¤º¸¼öÁ¤ ½ÇÆĞ ÀÔ´Ï´Ù.");
+		alert("ì •ë³´ìˆ˜ì • ì‹¤íŒ¨ ì…ë‹ˆë‹¤.");
 		history.go(-1);
 	</script>
 <%

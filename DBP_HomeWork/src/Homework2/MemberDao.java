@@ -184,15 +184,18 @@ public class MemberDao {
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
-		String query = "update meminfo set pwd=?, email=?, tel=? where id=?";
+		String query = "update meminfo set pwd=?, email=?, tel=?, dept=?, sex=?, introduction=? where id=?";
 		
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setString(1, dto.getPwd());
 			pstmt.setString(2, dto.getEmail());
-			pstmt.setString(2, dto.getTel());
-			pstmt.setString(4, dto.getId());
+			pstmt.setString(3, dto.getTel());
+			pstmt.setString(4, dto.getDept());
+			pstmt.setString(5, dto.getSex());
+			pstmt.setString(6, dto.getIntroduction());
+			pstmt.setString(7, dto.getId());
 			ri = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
