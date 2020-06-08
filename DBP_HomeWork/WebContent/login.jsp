@@ -13,7 +13,7 @@
 	<form action="loginOk.jsp" method="post">
 		아이디 : <input type="text" name="id" value="<% if(session.getAttribute("id") != null) out.println(session.getAttribute("id")); %>"> <br />
 		비밀번호 : <input type="password" name="pwd"><br />
-		<input type="submit" value="로그인"> &nbsp;&nbsp; <input type="button" value="멤버정보등록" onclick="javascript:window.location='join.jsp'">
+		<input type="submit" value="로그인"> &nbsp;&nbsp; <input type="button" value="멤버정보등록" onclick="javascript:window.location='member2.html'">
 	</form>
 </body>
 </html>

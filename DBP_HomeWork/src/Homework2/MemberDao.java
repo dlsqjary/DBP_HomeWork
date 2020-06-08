@@ -161,6 +161,7 @@ public class MemberDao {
 				dto.setTel(rs.getString("tel"));
 				dto.setIntroduction(rs.getString("introduction"));
 				dto.setSex(rs.getString("sex"));
+				dto.setBirth(rs.getString("birth"));
 				;
 			}
 		} catch (Exception e) {
@@ -184,7 +185,7 @@ public class MemberDao {
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
-		String query = "update meminfo set pwd=?, email=?, tel=?, dept=?, sex=?, introduction=? where id=?";
+		String query = "update meminfo set pwd=?, email=?, tel=?, dept=?, sex=?, introduction=? , birth=? where id=?";
 		
 		try {
 			connection = getConnection();
@@ -195,7 +196,8 @@ public class MemberDao {
 			pstmt.setString(4, dto.getDept());
 			pstmt.setString(5, dto.getSex());
 			pstmt.setString(6, dto.getIntroduction());
-			pstmt.setString(7, dto.getId());
+			pstmt.setString(7, dto.getBirth());
+			pstmt.setString(8, dto.getId());
 			ri = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

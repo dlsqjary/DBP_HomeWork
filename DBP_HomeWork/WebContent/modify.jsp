@@ -26,6 +26,12 @@
 		전공 : <input type="text" name="dept" size="20" value="<%= dto.getDept() %>"><br />
 		전화번호 : <input type="text" name="tel" size="50" value="<%= dto.getTel() %>"><br />
 		성별 : <input type="text" name="sex" size="10" value="<%= dto.getSex() %>"><br />
+		생일 : <select name="birth" >
+                 <option value="Spring"> 봄 
+                 <option value="Summer"> 여름 
+                 <option value="Fall"> 가을 
+                 <option value="Winter"> 겨울                 
+              </select>  <br/>
 		소개 : <input type="text" name="introduction" size="100" value="<%= dto.getIntroduction() %>"><br />
 		<input type="button" value="수정" onclick="updateInfoConfirm()"> &nbsp;&nbsp;&nbsp; <input type="reset" value="취소" onclick="javascript:window.location='login.jsp'">
 	</form>
