@@ -236,32 +236,41 @@ public class MemberDao {
 		return connection;
 	}
 	
-	public static List<MemberDto> show(Statement st) throws SQLException {
+	public  ArrayList<MemberDto> show(Statement st) throws SQLException {
 		String sql = "select * from meminfo";
+		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
 		ResultSet rs = st.executeQuery(sql);
 		List<MemberDto>data = new ArrayList<MemberDto>();
 		int cnt = 0;
 		
 		while(rs.next()) {
+			MemberDto mem = new MemberDto();
+			
 			String id = rs.getString("id");
 			String name = rs.getString("name");
 			String tel = rs.getString("tel");
 			String email = rs.getString("email");
 			String dept = rs.getString("dept");
-			String gender = rs.getString("gender");
+			String sex = rs.getString("sex");
 			String birth = rs.getString("birth");
 			String introduction = rs.getString("introduction");
 			
-			
+			mem.setId(id); 
+			mem.setName(name);
+			mem.setTel(tel);
+			mem.setEmail(email);
+			mem.setDept(dept);
+			mem.setSex(sex);
+			mem.setBirth(birth);
+			mem.setIntroduction(introduction);
 			
 			System.out.printf("id:  %d, name: %s, tel: %s, email: %s, dept: %s, gender: %s, birth: %s, intro: %s "
-					+ "\n", id, name, tel, email, dept,gender ,birth ,introduction);
+					+ "\n", id, name, tel, email, dept,sex ,birth ,introduction);
 			//data.add(mem);
 			cnt++;
 		}
 		rs.close();
-		return data;
-
+		return list;
 	}
 
 	public ArrayList<MemberDto> list() {
@@ -307,6 +316,49 @@ public class MemberDao {
 				e2.printStackTrace();
 			}
 		}
+		return dtos;
+	}
+	
+	public ArrayList<MemberDto> membersAll() {
+		// TODO Auto-generated method stub
+		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "select * from meminfo";
+		
+		try {
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			System.out.println("============");
+			while (rs.next()) {
+				MemberDto dto = new MemberDto();
+				dto.setId(rs.getString("id"));
+				dto.setPwd(rs.getString("pwd"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setDept(rs.getString("dept"));
+				dto.setSex(rs.getString("sex"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setIntroduction(rs.getString("introduction"));
+				dtos.add(dto);
+			}
+			System.out.println("--------------------------");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
 		return dtos;
 	}
 
