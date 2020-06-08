@@ -15,6 +15,7 @@ public class MemberDto {
 	}
 	public MemberDto() {
 		
+		
 	}
 	
 	public String getId() {

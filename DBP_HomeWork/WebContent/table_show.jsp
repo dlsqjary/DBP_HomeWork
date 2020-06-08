@@ -27,6 +27,7 @@
 			<td>이름</td>
 			<td>전화번호</td>
 			
+			
 		</tr>
 		<c:forEach items="${show}" var="dto">
 		<tr>

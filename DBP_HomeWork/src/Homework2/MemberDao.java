@@ -185,6 +185,7 @@ public class MemberDao {
 		return dto;
 
 	}
+	
 
 	public int updateMember(MemberDto dto) {
 		int ri = 0;
