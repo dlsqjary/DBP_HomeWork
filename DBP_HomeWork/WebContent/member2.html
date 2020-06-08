@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -32,8 +33,12 @@
               <textarea cols="30" rows="10" name=introduction></textarea> <br/> 
         <input type="submit" value="전송" />
         <input type="reset"  value="지우기" />
-        <input type="submit" value="DBshow" />
-        <input type="submit" value="DBdelete" />
+    </form>
+    <form action="table_show" method=post>
+    	<input type="button" value="DBshow" onclick="javascript:window.location='table_show.jsp'"/>
+    </form>
+    <form action="button.jsp" method=post>
+    	<input type="button" value="DBdelete" onclick="javascript:window.location='delete_table.jsp'"/>
     </form>
 </body>
 </html>

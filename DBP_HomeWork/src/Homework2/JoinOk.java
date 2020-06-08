@@ -114,7 +114,7 @@ public class JoinOk extends HttpServlet {
 			String email = rs.getString("email");
 			String dept = rs.getString("dept");
 			String gender = rs.getString("gender");
-			String birth = rs.getString("gender");
+			String birth = rs.getString("birth");
 			String introduction = rs.getString("introduction");
 			
 			

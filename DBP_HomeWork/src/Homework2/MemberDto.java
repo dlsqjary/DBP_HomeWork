@@ -10,8 +10,11 @@ public class MemberDto {
 	private String sex;
 	private String birth;
 	private String introduction;
-	public MemberDto() {
+	public MemberDto(String id, String pwd, String name, String tel, String email, String dept, String sex, String birth, String introduction) {
 		// TODO Auto-generated constructor stub
+	}
+	public MemberDto() {
+		
 	}
 	
 	public String getId() {

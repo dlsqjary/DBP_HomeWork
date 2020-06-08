@@ -3,6 +3,11 @@ package Homework2;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,6 +15,7 @@ import javax.sql.DataSource;
 
 import Homework2.MemberDao;
 import Homework2.MemberDto;
+
 
 public class MemberDao {
 
@@ -20,23 +26,23 @@ public class MemberDao {
 	public static final int MEMBER_LOGIN_PW_NO_GOOD = 0;
 	public static final int MEMBER_LOGIN_SUCCESS = 1;
 	public static final int MEMBER_LOGIN_IS_NOT = -1;
-	
+
 	private static MemberDao instance = new MemberDao();
-	
+
 	private MemberDao() {
 	}
-	
+
 	public static MemberDao getInstance(){
 		return instance;
 	}
-	
+
 	public int insertMember(MemberDto dto) {
 		int ri = 0;
-		
+
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		String query = "insert into meminfo values (?,?,?,?,?,?,?,?,?)";
-		
+
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
@@ -61,18 +67,18 @@ public class MemberDao {
 				e2.printStackTrace();
 			}
 		}
-		
+
 		return ri;
 	}
-	
+
 	public int confirmId(String id) {
 		int ri = 0;
-		
+
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet set = null;
 		String query = "select id from meminfo where id = ?";
-		
+
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
@@ -94,25 +100,25 @@ public class MemberDao {
 				e2.printStackTrace();
 			}
 		}
-		
+
 		return ri;
 	}
-	
+
 	public int userCheck( String id, String pw) {
 		int ri = 0;
 		String dbPw;
-		
+
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet set = null;
 		String query = "select pwd from meminfo where id = ?";
-		
+
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setString(1, id);
 			set = pstmt.executeQuery();
-			
+
 			if(set.next()) {
 				dbPw = set.getString("pwd");
 				if(dbPw.equals(pw)) {
@@ -123,7 +129,7 @@ public class MemberDao {
 			} else {
 				ri = MemberDao.MEMBER_LOGIN_IS_NOT;		// X	
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -137,20 +143,20 @@ public class MemberDao {
 		}
 		return ri;
 	}
-	
+
 	public MemberDto getMember(String id) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = "select * from meminfo where id = ?";
 		MemberDto dto = null;
-		
+
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.next()) {
 				dto = new MemberDto();
 				dto.setId(rs.getString("id"));
@@ -175,18 +181,18 @@ public class MemberDao {
 				e2.printStackTrace();
 			}
 		}
-		
+
 		return dto;
-		
+
 	}
-	
+
 	public int updateMember(MemberDto dto) {
 		int ri = 0;
-		
+
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		String query = "update meminfo set pwd=?, email=?, tel=?, dept=?, sex=?, introduction=? , birth=? where id=?";
-		
+
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
@@ -209,12 +215,12 @@ public class MemberDao {
 				e2.printStackTrace();
 			}
 		}
-		
+
 		return ri;
 	}
-	
+
 	private Connection getConnection() {
-		
+
 		Context context = null;
 		DataSource dataSource = null;
 		Connection connection = null;
@@ -225,8 +231,82 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return connection;
 	}
 	
+	public static List<MemberDto> show(Statement st) throws SQLException {
+		String sql = "select * from meminfo";
+		ResultSet rs = st.executeQuery(sql);
+		List<MemberDto>data = new ArrayList<MemberDto>();
+		int cnt = 0;
+		
+		while(rs.next()) {
+			String id = rs.getString("id");
+			String name = rs.getString("name");
+			String tel = rs.getString("tel");
+			String email = rs.getString("email");
+			String dept = rs.getString("dept");
+			String gender = rs.getString("gender");
+			String birth = rs.getString("birth");
+			String introduction = rs.getString("introduction");
+			
+			
+			
+			System.out.printf("id:  %d, name: %s, tel: %s, email: %s, dept: %s, gender: %s, birth: %s, intro: %s "
+					+ "\n", id, name, tel, email, dept,gender ,birth ,introduction);
+			//data.add(mem);
+			cnt++;
+		}
+		rs.close();
+		return data;
+
+	}
+
+	public ArrayList<MemberDto> list() {
+
+		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		DataSource dataSource = null;
+
+		try {
+			connection = dataSource.getConnection();
+
+			String query = "select id, pwd, name, tel, dept, sex, birth, introduction, email from meminfo";
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				String id = resultSet.getString("id");
+				String pwd = resultSet.getString("pwd");
+				String name = resultSet.getString("name");
+				String tel = resultSet.getString("tel");
+				String dept = resultSet.getString("dept");
+				String sex = resultSet.getString("sex");
+				String birth = resultSet.getString("birth");
+				String introduction = resultSet.getString("introduction");
+				String email = resultSet.getString("email");
+
+				MemberDto dto = new MemberDto(id, pwd, name, tel, email, dept, sex, birth, introduction);
+				dtos.add(dto);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(resultSet != null) resultSet.close();
+				if(preparedStatement != null) preparedStatement.close();
+				if(connection != null) connection.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		return dtos;
+	}
+
 }
