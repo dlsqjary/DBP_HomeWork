@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("*.do")
 public class FrontCon extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FrontCon() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FrontCon() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,23 +41,26 @@ public class FrontCon extends HttpServlet {
 		System.out.println("doPost");
 		actionDo(request, response);
 	}
-	
+
 	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("actionDo");
-		
+
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath(); 
 		String command = uri.substring(conPath.length());
-		
+
 		if(command.equals("/membersAll.do")) {
 			response.setContentType("text/html; charset=EUC-KR");
 			PrintWriter writer = response.getWriter();
 			writer.println("<html><head></head><body>");
-			
+
 			Service service = new MembersAllService();
 			ArrayList<MemberDto> dtos = service.execute(request, response);
-			
+
+			writer.println("Id, name, dept, email, sex, tel, birth, intrudcution" + "<hr />");
+			writer.println("<hr />");
+
 			for (int i = 0; i < dtos.size(); i++) {
 				MemberDto dto = dtos.get(i);
 				String id = dto.getId();
@@ -69,13 +72,20 @@ public class FrontCon extends HttpServlet {
 				String tel = dto.getTel();
 				String birth = dto.getBirth();
 				String introduction = dto.getIntroduction();
-				
-				writer.println(id + ", " + pwd + ", " + name + ", " + email + ", " + email + ", " + dept + "<hr />");
+
+				writer.println(id + ", " + name + ", " + dept + ", " + email + ", " + sex + ", " + tel + ", " + birth + ", " + introduction +"<hr />");
 			}
-			
+
 			writer.println("</body></html>");
+		}else if(command.equals("/deletePage.do")) {
+			response.setContentType("text/html; charset=EUC-KR");
+			PrintWriter writer = response.getWriter();
+			writer.println("<html><head></head><body>");
+
+			Service service = new MemberDelete();
+			ArrayList<MemberDto> dtos = service.execute(request, response);
 		}
-		
+
 	}
 
 }

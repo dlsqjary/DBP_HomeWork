@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>테이블삭제 페이지</h1>
+	<a href="deletePage.do">전체 테이블 삭제</a>
 </body>
 </html>

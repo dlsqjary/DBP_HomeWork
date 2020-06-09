@@ -273,51 +273,7 @@ public class MemberDao {
 		return list;
 	}
 
-	public ArrayList<MemberDto> list() {
-
-		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		DataSource dataSource = null;
-
-		try {
-			connection = dataSource.getConnection();
-
-			String query = "select id, pwd, name, tel, dept, sex, birth, introduction, email from meminfo";
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-
-			while (resultSet.next()) {
-				String id = resultSet.getString("id");
-				String pwd = resultSet.getString("pwd");
-				String name = resultSet.getString("name");
-				String tel = resultSet.getString("tel");
-				String dept = resultSet.getString("dept");
-				String sex = resultSet.getString("sex");
-				String birth = resultSet.getString("birth");
-				String introduction = resultSet.getString("introduction");
-				String email = resultSet.getString("email");
-
-				MemberDto dto = new MemberDto(id, pwd, name, tel, email, dept, sex, birth, introduction);
-				dtos.add(dto);
-			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			try {
-				if(resultSet != null) resultSet.close();
-				if(preparedStatement != null) preparedStatement.close();
-				if(connection != null) connection.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-				e2.printStackTrace();
-			}
-		}
-		return dtos;
-	}
+	
 	
 	public ArrayList<MemberDto> membersAll() {
 		// TODO Auto-generated method stub
@@ -346,6 +302,37 @@ public class MemberDao {
 				dtos.add(dto);
 			}
 			System.out.println("--------------------------");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				connection.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return dtos;
+	}
+	
+	public ArrayList<MemberDto> deleteAll() {
+		// TODO Auto-generated method stub
+		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String query = "delete from meminfo";
+		
+		try {
+			connection = getConnection();
+			pstmt = connection.prepareStatement(query);
+			int ret = pstmt.executeUpdate();
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -15,6 +15,6 @@
 		비밀번호 : <input type="password" name="pwd"><br />
 		<input type="submit" value="로그인"> &nbsp;&nbsp; <input type="button" value="멤버정보등록" onclick="javascript:window.location='member2.html'">
 	</form>
-	<a href="table_show.jsp">테이블목록보기</a></td>
+	<a href="memberAll.jsp">테이블목록보기</a></td>
 </body>
 </html>
